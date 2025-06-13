@@ -12,14 +12,14 @@ let
       version = "0.0.1";
 
       # If you have your sources locally, you can specify a path
-      # src = /Users/bahrom04/workplace/open-sors/auto-profile;
+      src =./auto-profile-tg;
 
       # Pull source from a Git server. Optionally select a specific `ref` (e.g. branch),
       # or `rev` revision hash.
-      src = builtins.fetchGit {
-        url = "git://github.com:bahrom04/auto-profile.git";
-        ref = master;
-      };
+      # src = builtins.fetchGit {
+      #   url = "git://github.com:bahrom04/auto-profile.git";
+      #   ref = master;
+      # };
 
       # Specify runtime dependencies for the package
       propagatedBuildInputs = [ 

@@ -57,7 +57,7 @@ in {
     };
   };
  
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.auto-profile-tg = {
       description = "run the bot on systemd";
       environment = {
