@@ -16,11 +16,13 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       in {
-        # Niz script formattar
+        # Nix script formattar
         formatter = pkgs.alejandra;
 
         # Output package
-        packages.default = pkgs.callPackage ./.;
+        packages.default = pkgs.callPackage ./. {};
+      } // {
+        darwinModules.default = import ./module.nix;
       }
     );
 

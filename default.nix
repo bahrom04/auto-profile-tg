@@ -1,47 +1,47 @@
 # tutorial: https://blog.stigok.com/2019/11/05/packing-python-script-binary-nicely-in-nixos.html
+# reference: https://nixos.org/manual/nixpkgs/stable/#buildpythonpackage-function
+{ 
+python3
+, fetchPypi
+, python3Packages
+}:
 
-{ nixpkgs ? import <nixpkgs> {}, pythonPkgs ? nixpkgs.pkgs.python312Packages }:
+python3.pkgs.buildPythonApplication rec {
+  pname = "auto-profile-tg";
+  version = "0.0.1";
 
-let 
-  inherit (nixpkgs) pkgs;
-  inherit pythonPkgs;
+  src =./auto-profile-tg;
 
-  f = { buildPythonPackage, bottle, requests }:
-    buildPythonPackage rec {
-      pname = "auto-profile-tg";
-      version = "0.0.1";
+  #src = builtins.fetchGit {
+  #   url = "git://github.com:bahrom04/auto-profile.git";
+  #   ref = master;
+  # };
 
-      # If you have your sources locally, you can specify a path
-      src =./auto-profile-tg;
+  propagatedBuildInputs = with python3Packages; [
+    pip
+    APScheduler
+    loguru
+    python-dotenv
+    pytz
+    requests
+    tenacity
+    telethon
+    setuptools
+  ];
+  
 
-      # Pull source from a Git server. Optionally select a specific `ref` (e.g. branch),
-      # or `rev` revision hash.
-      # src = builtins.fetchGit {
-      #   url = "git://github.com:bahrom04/auto-profile.git";
-      #   ref = master;
-      # };
+  # postPatch = ''
+  #   cp ${src}/requirements.txt .
+  # '';
 
-      # Specify runtime dependencies for the package
-      propagatedBuildInputs = [ 
-        # APScheduler
-        # loguru 
-        # python-dotenv 
-        # pytz 
-        # Telethon
-        # tenacity
-        # setuptools
-        requests
-        ];
+  # preBuild = ''
+  #   pip install --prefix=$out -r requirements.txt
+  # '';
 
-        # No tests
-        doCheck = false; 
+  # No tests
+  doCheck = false; 
 
-        # Meta information for the package
-        meta = {
-          description = "auto-profile adds real-time clock to your telegram profile username";
-        };
-    };
-
-    drv = pythonPkgs.callPackage f{};
-in 
-  if pkgs.lib.inNixShell then drv.env else drv
+  meta = {
+    description = "auto-profile adds real-time clock to your telegram profile username";
+  };
+}
