@@ -1,7 +1,7 @@
 flake: { config, lib, pkgs, ...}:
 let
   pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  cfg = services.config.auto-profile-tg;
+  cfg = config.services.auto-profile-tg;
 in {
   options = {
     services.auto-profile-tg = {
