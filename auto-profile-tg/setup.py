@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="auto-profile-tg",
     version="0.0.1",
-    scripts=["./auto-profile-tg/main.py"],
+    scripts=["main.py"],
     packages=find_packages(include=["assets", "prodile_pics", "utils"]),
     install_requires=[
         "APScheduler==3.11.0",

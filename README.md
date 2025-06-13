@@ -144,4 +144,5 @@ pip install -e .
 ```
 nix-instantiate  --eval default.nix
 nix-build default.nix
+nix run github:bahrom04/auto-profile-tg
 ```

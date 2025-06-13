@@ -7,3 +7,6 @@ __pycache__/
 AutoProfileUpdater.session
 AutoProfileUpdater.session-journal
 bot.log
+
+# nix
+result
