@@ -1,5 +1,5 @@
 {
-  description = "";
+  description = "auto-profile-tg - Adds real-time clock to your telegram profile and more";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
