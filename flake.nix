@@ -22,9 +22,8 @@
         devShells.default = pkgs.callPackage ./shell.nix {};
         # Output package
         packages.default = pkgs.callPackage ./. {};
-      } // {
-        darwinModules.default = import ./module.nix;
-      }
+      } 
     );
+    darwinModules.default = import ./module.nix;
 
 }
