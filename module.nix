@@ -1,69 +1,67 @@
-{ config, lib, pkgs, ...}:
+flake: { config, lib, pkgs, ...}:
 let
-  auto-profile-tg = pkgs.callPackage ./default.nix {};
-
+  pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
   cfg = config.auto-profile-tg;
-
 in {
-  options = with lib; {
+  options = {
     auto-profile-tg = {
-      enable = mkEnableOption "auto-profile-tg";
+      enable = lib.mkEnableOption "auto-profile-tg";
 
       # Telegram API credentials from my.telegram.org
-      app-id = mkOption {
-        type = types.int;
+      app-id = lib.mkOption {
+        type = lib.types.int;
         default = 0;
         example = 12345678;
       };
 
-      api-hash = mkOption {
-        type = types.str;
+      api-hash = lib.mkOption {
+        type = lib.types.str;
         default = "";
       };
 
-      phone-number = mkOption {
-        type = types.str;
+      phone-number = lib.mkOption {
+        type = lib.types.str;
         example = "+998123456789";
       };
 
-      first-name = mkOption {
-        type = types.str;
+      first-name = lib.mkOption {
+        type = lib.types.str;
         example = "John";
       };
 
-      lat = mkOption {
-        type = types.str;
+      lat = lib.mkOption {
+        type = lib.types.str;
         example = "41.2995";
       };
 
-      lon = mkOption {
-        type = types.str;
+      lon = lib.mkOption {
+        type = lib.types.str;
         example = "69.2401";
       };
-      
-      timezone = mkOption {
-        type = types.str;
+
+      timezone = lib.mkOption {
+        type = lib.types.str;
         example = "Asia/Tashkent";
       };
-      
-      city = mkOption {
-        type = types.str;
+
+      city = lib.mkOption {
+        type = lib.types.str;
         example = "Tashkent";
       };
 
-      weather-api-key = mkOption {
-        type = types.str;
+      weather-api-key = lib.mkOption {
+        type = lib.types.str;
       };
     };
   };
- 
+
   config = lib.mkIf cfg.enable {
     # systemd.services.auto-profile-tg = {
     #   description = "run the bot on systemd";
     #   environment = {
     #     PYTHONUNBUFFERED = "1";
     #   };
-      
+
     #   after = [ "network.target" ];
     #   wantedBy = [ "network.target" ];
 
@@ -73,11 +71,11 @@ in {
     # };
 
     # I use mac btw
-    launchd.agents = {
+    launchd.user.agents = {
       auto-profile-tg = {
         enable = true;
-        config = {
-          Program = "${auto-profile-tg}/bin/main.py";
+        serviceConfig = {
+          Program = "${pkg}/bin/main.py";
           # ProgramArguments = ["${auto-profile-tg}/bin/main.py" "--API_ID=${}" "--API_HASH=${}"]; do .env parsing
           KeepAlive = true;
           RunAtLoad = true;

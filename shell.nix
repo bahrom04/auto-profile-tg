@@ -1,21 +1,29 @@
 # reference: https://nixos.wiki/wiki/Packaging/Python
+{pkgs ? import <nixpkgs> {}}: let
+  pythonEnv = pkgs.python3.withPackages (ps:
+    with ps; [
+      pip
+      APScheduler
+      loguru
+      python-dotenv
+      pytz
+      requests
+      tenacity
+      telethon
+      setuptools
+    ]);
+in
+  pkgs.stdenv.mkDerivation {
+    name = "auto-profile-tg-dev";
 
-{ 
-python3,
-}:
+    nativeBuildInputs = with pkgs; [
+      # Nix
+      nixd
+      alejandra
+      statix
+      deadnix
 
-python3.pkgs.buildPythonPackage rec {
-  name = "auto-profile-tg";
-  scr = "./auto-profile-tg";
-  propagatedBuildInputs = with python3.pkgs; [
-    pip
-    APScheduler
-    loguru
-    python-dotenv
-    pytz
-    requests
-    tenacity
-    telethon
-    setuptools
+      # Python
+      pythonEnv
     ];
-}
+  }
