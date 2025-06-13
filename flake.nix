@@ -25,6 +25,6 @@
       packages.default = pkgs.callPackage ./. {};
     })
     // {
-      darwinModules.default = import ./module.nix;
+      darwinModules.default = import ./module.nix self;
     };
 }
