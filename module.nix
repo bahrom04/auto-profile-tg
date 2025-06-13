@@ -83,7 +83,7 @@ in {
           RunAtLoad = true;
           # EnvironmentVariables.PATH = "${pkgs.restic}/bin:/usr/bin";
         };
-      }
+      };
     };
   };
 }

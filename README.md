@@ -143,7 +143,6 @@ pip install -e .
 ### You can see if your package file compiles 
 ```
 nix-instantiate  --eval default.nix
-nix flake show
 nix-build default.nix
 nix run github:bahrom04/auto-profile-tg
 ```
