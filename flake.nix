@@ -22,6 +22,6 @@
         # Output package
         packages.default = pkgs.callPackage ./.;
       }
-    )
+    );
 
 }
