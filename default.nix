@@ -33,9 +33,9 @@ python3.pkgs.buildPythonApplication rec {
   ];
   
 
-  # postPatch = ''
-  #   cp ${src}/requirements.txt .
-  # '';
+  postPatch = ''
+    cp ${src}/requirements.txt .
+  '';
 
   preBuild = ''
     cat > setup.py << EOF
