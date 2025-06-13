@@ -37,9 +37,39 @@ python3.pkgs.buildPythonApplication rec {
   #   cp ${src}/requirements.txt .
   # '';
 
-  # preBuild = ''
-  #   pip install --prefix=$out -r requirements.txt
-  # '';
+  preBuild = ''
+    cat > setup.py << EOF
+    from setuptools import setup, find_packages
+
+    with open('./auto-profile-tg/requirements.txt') as f:
+        install_requires = f.read().splitlines()
+
+    setup(
+      name="auto-profile-tg",
+      packages=find_packages(include=["assets", "prodile_pics", "utils"]),
+      version='0.1.0',
+      #author='...',
+      #description='...',
+      install_requires=[
+        "APScheduler==3.11.0",
+        "loguru==0.7.3",
+        "python-dotenv==1.1.0",
+        "pytz==2025.2",
+        "requests==2.32.4",
+        "Telethon==1.40.0",
+        "tenacity==9.1.2",
+        "setuptools",
+      ]
+      scripts=[
+        './auto-profile-tg/main.py',
+      ],
+      entry_points={
+        # example: file some_module.py -> function main
+        #'console_scripts': ['someprogram=auto-profile-tg:main']
+      },
+    )
+        EOF
+  '';
 
   # No tests
   doCheck = false; 
