@@ -138,7 +138,10 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting a pull reques
 ```
 python setup.py install
 pip install -e . 
+```
 
-You can see if your package file compiles with nix-instantiate --eval default.nix
+### You can see if your package file compiles 
+```
+nix-instantiate  --eval default.nix
 nix-build default.nix
 ```
