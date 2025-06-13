@@ -4,15 +4,13 @@
 fetchFromGitHub
 , python3
 , fetchPypi
-, python3Packages
+# , python3Packages
 }:
 
-python3.pkgs.buildPythonApplication rec {
+python3.pkgs.buildPythonPackage rec {
   pname = "auto-profile-tg";
   version = "0.0.1";
-
   # src =./auto-profile-tg;
-
   src = fetchFromGitHub {
     owner = "bahrom04";
     repo = "auto-profile-tg";
@@ -20,7 +18,7 @@ python3.pkgs.buildPythonApplication rec {
     sha256 = "sha256-jYhVZ19gAPxSiyosBYECROrC3Vf6kZjZFsBgKFMVBHc=";
   };
 
-  propagatedBuildInputs = with python3Packages; [
+  propagatedBuildInputs = with python3.pkgs; [
     pip
     APScheduler
     loguru
@@ -32,10 +30,9 @@ python3.pkgs.buildPythonApplication rec {
     setuptools
   ];
   
-
-  postPatch = ''
-    cp ${src}/requirements.txt .
-  '';
+  # postPatch = ''
+  #   cp ${src}/requirements.txt .
+  # '';
 
   preBuild = ''
     cat > setup.py << EOF

@@ -19,6 +19,7 @@
         # Nix script formattar
         formatter = pkgs.alejandra;
 
+        devShells.default = pkgs.callPackage ./shell.nix {};
         # Output package
         packages.default = pkgs.callPackage ./. {};
       } // {
