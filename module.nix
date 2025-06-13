@@ -2,11 +2,11 @@
 let
   auto-profile-tg = pkgs.callPackage ./default.nix {};
 
-  cfg = config.services.auto-profile-tg;
+  cfg = config.auto-profile-tg;
 
 in {
   options = with lib; {
-    services.auto-profile-tg = {
+    auto-profile-tg = {
       enable = mkEnableOption "auto-profile-tg";
 
       # Telegram API credentials from my.telegram.org
