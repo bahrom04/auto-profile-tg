@@ -1,10 +1,10 @@
 flake: { config, lib, pkgs, ...}:
 let
   pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  cfg = config.auto-profile-tg;
+  cfg = services.config.auto-profile-tg;
 in {
   options = {
-    auto-profile-tg = {
+    services.auto-profile-tg = {
       enable = lib.mkEnableOption "auto-profile-tg";
 
       # Telegram API credentials from my.telegram.org
@@ -73,7 +73,7 @@ in {
     # I use mac btw
     launchd.user.agents = {
       auto-profile-tg = {
-        enable = true;
+        # enable = true;
         serviceConfig = {
           Program = "${pkg}/bin/main.py";
           # ProgramArguments = ["${auto-profile-tg}/bin/main.py" "--API_ID=${}" "--API_HASH=${}"]; do .env parsing
