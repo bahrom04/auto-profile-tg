@@ -1,4 +1,4 @@
-from .main import main
+from auto_profile_tg.main import main
 import asyncio
 from loguru import logger
 
