@@ -14,7 +14,7 @@ python3.pkgs.buildPythonPackage rec {
     owner = "bahrom04";
     repo = "auto-profile-tg";
     rev = "master";
-    sha256 = "sha256-vIsCQZqMEap2fF4dsH25Mu6ogbXAIWHv5PCISLS7Q/s=";
+    sha256 = "sha256-Dg6sIklds5wdBm3sFoulhG41cGDbhpGhjjodpOy+kuw=";
   };
 
   propagatedBuildInputs = with python3.pkgs; [
@@ -47,7 +47,7 @@ setup(
   install_requires=install_requires,
 
   entry_points={
-    'console_scripts': ['auto-profile-tg = auto_profile_tg.main:main']
+    'console_scripts': ['auto-profile-tg = auto_profile_tg.__main__:main']
   }
 )
 EOF

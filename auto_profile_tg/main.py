@@ -8,7 +8,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from loguru import logger
 import pytz
 
-import config
+from . import config
 from utils.bio_utils import generate_display_fields
 
 # Configure Loguru logger
