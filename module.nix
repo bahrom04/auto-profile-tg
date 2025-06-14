@@ -1,7 +1,24 @@
-flake: { config, lib, pkgs, ...}:
-let
-  pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
+flake: {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.services.auto-profile-tg;
+  pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+  genArgs = {cfg}: let
+    app-id = config.app-id;
+    api-hash = config.api-hash;
+    phone-number = config.phone-number;
+    first-name = config.first-name;
+    lat = config.lat;
+    lon = config.lon;
+    timezone = config.timezone;
+    city = config.city;
+    weather-api-key = config.weather-api-key;
+  in
+    lib.strings.concatStringsSep " " [app-id api-hash phone-number first-name lat lon timezone city weather-api-key];
 in {
   options = {
     services.auto-profile-tg = {
@@ -76,7 +93,7 @@ in {
         # enable = true;
         serviceConfig = {
           Program = "${pkg}/bin/main.py";
-          # ProgramArguments = ["${auto-profile-tg}/bin/main.py" "--API_ID=${}" "--API_HASH=${}"]; do .env parsing
+          # ProgramArguments = ["${pkg}/bin/main.py" "${genArgs {cfg = cfg;}"]; do .env parsing
           KeepAlive = true;
           RunAtLoad = true;
           # EnvironmentVariables.PATH = "${pkgs.restic}/bin:/usr/bin";
