@@ -97,7 +97,6 @@ in {
           StandardErrorPath = "/${homeDir}/Library/Logs/auto-profile-tg-error.log";
           KeepAlive = true;
           RunAtLoad = true;
-          # EnvironmentVariables.PATH = "${pkgs.restic}/bin:/usr/bin";
         };
       };
     };
