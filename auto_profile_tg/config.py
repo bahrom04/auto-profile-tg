@@ -42,7 +42,7 @@ def _safe_float(key: str, default: float = 0.0) -> float:
 # Telegram API credentials
 API_ID = f"{args.api_id}"
 API_HASH = f"{args.api_hash}"
-PHONE_NUMBER = f"{args.phone-number}"
+PHONE_NUMBER = f"{args.phone_number}"
 
 # User credentials
 FIRST_NAME = f"{args.first_name}"
