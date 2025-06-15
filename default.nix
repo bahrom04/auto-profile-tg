@@ -14,7 +14,7 @@ python3.pkgs.buildPythonPackage rec {
     owner = "bahrom04";
     repo = "auto-profile-tg";
     rev = "master";
-    sha256 = "sha256-Dg6sIklds5wdBm3sFoulhG41cGDbhpGhjjodpOy+kuw=";
+    sha256 = "sha256-XUldev+62AvhKCkC08q8DDgXhPmoLaSSYQ0mAsBYhMw=";
   };
 
   propagatedBuildInputs = with python3.pkgs; [
@@ -30,6 +30,7 @@ python3.pkgs.buildPythonPackage rec {
   ];
 
   nativeBuildInputs = with python3.pkgs;[
+    poetry-core
     flit-core
   ];
   # No tests
