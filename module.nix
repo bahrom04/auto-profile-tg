@@ -83,7 +83,7 @@ in {
           # Program = "${pkg}/bin/runner";
           ProgramArguments = [
             "${pkg}/bin/runner" 
-            "--api_id=${toString cfg.api-id}" 
+            "--api_id=${cfg.api-id}" 
             "--api_hash=${cfg.api-hash}" 
             "--phone_number=${cfg.phone-number}" 
             "--first_name=${cfg.first-name}"
