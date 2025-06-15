@@ -2,11 +2,11 @@ from datetime import datetime
 import pytz
 from loguru import logger
 
-import config
-from utils.weather_utils import get_weather_short
-from utils.prayer_utils import fetch_prayer_data, get_next_prayer_short, get_hijri_short
-from utils.time_utils import format_short_date, format_time
-from utils.status_utils import get_status
+from auto_profile_tg import config
+from auto_profile_tg.utils.weather_utils import get_weather_short
+from auto_profile_tg.utils.prayer_utils import fetch_prayer_data, get_next_prayer_short, get_hijri_short
+from auto_profile_tg.utils.time_utils import format_short_date, format_time
+from auto_profile_tg.utils.status_utils import get_status
 
 
 def generate_display_fields():

@@ -4,7 +4,7 @@ from datetime import datetime
 from tenacity import retry, stop_after_attempt, wait_fixed
 from loguru import logger
 
-from config import LAT, LON, TIMEZONE
+from auto_profile_tg.config import LAT, LON, TIMEZONE
 
 # Uzbek names for the five daily Islamic prayers
 PRAYER_NAMES = {

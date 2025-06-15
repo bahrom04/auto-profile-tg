@@ -4,7 +4,7 @@ import requests
 from tenacity import retry, stop_after_attempt, wait_fixed
 from loguru import logger
 
-from config import WEATHER_API_KEY, CITY, TIMEZONE
+from auto_profile_tg.config import WEATHER_API_KEY, CITY, TIMEZONE
 
 # Mapping of English weather descriptions to Uzbek
 WEATHER_DESCRIPTIONS = {
