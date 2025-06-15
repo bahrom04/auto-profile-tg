@@ -22,5 +22,8 @@ setuptools = ">=80.9.0,<81.0.0"
 runner = "auto_profile_tg.__main__:runner"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = [
+    "poetry-core>=2.0.0,<3.0.0",
+    "flit_core",
+    ]
 build-backend = "poetry.core.masonry.api"

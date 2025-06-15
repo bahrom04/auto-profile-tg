@@ -5,6 +5,7 @@
       pip
       APScheduler
       loguru
+      flit-core
       python-dotenv
       pytz
       requests
