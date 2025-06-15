@@ -18,7 +18,15 @@
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      poetryApp = inputs.poetry2nix.lib.mkPoetry2Nix {inherit pkgs;};
+      poetryApp = inputs.poetry2nix.lib.mkPoetry2Nix {
+        inherit pkgs;
+        overrides = inputs.poetry2nix.lib.defaultPoetryOverrides.extend (self: super: {
+          loguru = super.loguru.overridePythonAttrs (old: {
+            nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ self."flit-core" ];
+          });
+        });
+      };
+
       autoProfileTgPkg = poetryApp.mkPoetryApplication {
         projectDir = pkgs.fetchFromGitHub {
           owner = "bahrom04";
