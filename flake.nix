@@ -1,3 +1,4 @@
+# reference to poetry2nix: https://github.com/nix-community/poetry2nix
 {
   description = "auto-profile-tg - Adds real-time clock to your telegram profile and more";
 
@@ -17,13 +18,13 @@
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      poetryApp = poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
+      poetryApp = inputs.poetry2nix.lib.mkPoetry2Nix {inherit pkgs;};
       autoProfileTgPkg = poetryApp.mkPoetryApplication {
         projectDir = pkgs.fetchFromGitHub {
           owner = "bahrom04";
           repo = "auto-profile-tg";
           rev = "master";
-          sha256 = "sha256-Dg6sIklds5wdBm3sFoulhG41cGDbhpGhjjodpOy+kuw=";
+          sha256 = "sha256-FFz1S2mNVsprWbDKsJG4uH8sL4uno0p41D7WrdAedSc=";
         };
       };
     in {
