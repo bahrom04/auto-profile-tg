@@ -58,4 +58,7 @@ LON = f"{args.lon}"
 TIMEZONE = f"{args.timezone}"
 CITY = f"{args.city}"
 
+print("---------------------------------")
+print(TIMEZONE)
+print("---------------------------------")
 logger.info(f"Config loaded: CITY={CITY}, TIMEZONE={TIMEZONE}, LAT={LAT}, LON={LON}")
