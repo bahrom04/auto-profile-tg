@@ -7,7 +7,7 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    poetry2nix.url = "github:nix-community/poetry2nix";
+    # poetry2nix.url = "github:nix-community/poetry2nix";
   };
 
   outputs = {
@@ -18,36 +18,29 @@
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      poetryApp = inputs.poetry2nix.lib.mkPoetry2Nix {
-        inherit pkgs;
-        overrides = inputs.poetry2nix.lib.defaultPoetryOverrides.extend (self: super: {
-          loguru = super.loguru.overridePythonAttrs (old: {
-            nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ self."flit-core" ];
-          });
-        });
-      };
+      # poetryApp = inputs.poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
 
-      autoProfileTgPkg = poetryApp.mkPoetryApplication {
-        projectDir = pkgs.fetchFromGitHub {
-          owner = "bahrom04";
-          repo = "auto-profile-tg";
-          rev = "master";
-          sha256 = "sha256-RaKpDZQNvq3qcl/ir6TDlD4v0luiMVwnnNPOpaLe8lI=";
-        };
-      };
+      # autoProfileTgPkg = poetryApp.mkPoetryApplication {
+      #   projectDir = pkgs.fetchFromGitHub {
+      #     owner = "bahrom04";
+      #     repo = "auto-profile-tg";
+      #     rev = "master";
+      #     sha256 = "sha256-RaKpDZQNvq3qcl/ir6TDlD4v0luiMVwnnNPOpaLe8lI=";
+      #   };
+      # };
     in {
       # Nix script formattar
       formatter = pkgs.alejandra;
 
-      devShells.default = autoProfileTgPkg.developmentShell;
+      devShells.default = pkgs.callPackage ./shell.nix { inherit pkgs; };
 
       # Output package
-      packages.default = autoProfileTgPkg;
+      packages.default = pkgs.callPackage ./. {};
 
-      apps.default = {
-        type = "app";
-        program = "${autoProfileTgPkg}/bin/runner";
-      };
+      # apps.default = {
+      #   type = "app";
+      #   program = "${autoProfileTgPkg}/bin/runner";
+      # };
     })
     // {
       darwinModules.default = import ./module.nix self;

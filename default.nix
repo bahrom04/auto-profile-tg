@@ -29,6 +29,9 @@ python3.pkgs.buildPythonPackage rec {
     setuptools
   ];
 
+  nativeBuildInputs = with python3.pkgs;[
+    flit-core
+  ];
   # No tests
   doCheck = false;
 
