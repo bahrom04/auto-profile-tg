@@ -1,8 +1,24 @@
-import os
+import os, argparse
 from dotenv import load_dotenv
 from loguru import logger
 
 load_dotenv()
+
+parser = argparse.ArgumentParser(description="run application")
+parser.add_argument("--api_id", required=True)
+parser.add_argument("--api_hash", required=True)
+parser.add_argument("--phone_number", required=True)
+
+parser.add_argument("--first_name", required=True)
+
+parser.add_argument("--lat", required=True)
+parser.add_argument("--lon", required=True)
+parser.add_argument("--timezone", required=True)
+parser.add_argument("--city", required=True)
+
+parser.add_argument("--weather_api_key", required=True)
+
+args = parser.parse_args()
 
 
 def _safe_int(key: str, default: int = 0) -> int:
@@ -24,22 +40,22 @@ def _safe_float(key: str, default: float = 0.0) -> float:
 
 
 # Telegram API credentials
-API_ID = _safe_int("API_ID")
-API_HASH = os.getenv("API_HASH", "")
-PHONE_NUMBER = _safe_int("PHONE_NUMBER")
+API_ID = f"{args.api_id}"
+API_HASH = f"{args.api_hash}"
+PHONE_NUMBER = f"{args.phone-number}"
 
 # User credentials
-FIRST_NAME = os.getenv("FIRST_NAME", "")
+FIRST_NAME = f"{args.first_name}"
 
 # Weather API key
-WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "")
+WEATHER_API_KEY = f"{args.weather_api_key}"
 if not WEATHER_API_KEY:
     logger.warning("Missing WEATHER_API_KEY")
 
 # Geographic coordinates and timezone
-LAT = _safe_float("LAT")
-LON = _safe_float("LON")
-TIMEZONE = os.getenv("TIMEZONE")
-CITY = os.getenv("CITY")
+LAT =f"{args.lat}"
+LON = f"{args.lon}"
+TIMEZONE = f"{args.timezone}"
+CITY = f"{args.city}"
 
 logger.info(f"Config loaded: CITY={CITY}, TIMEZONE={TIMEZONE}, LAT={LAT}, LON={LON}")
