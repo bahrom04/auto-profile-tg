@@ -14,7 +14,7 @@ python3.pkgs.buildPythonPackage rec {
     owner = "bahrom04";
     repo = "auto-profile-tg";
     rev = "master";
-    sha256 = "sha256-IUrrifTBbfzrXqH75tGozo8WYu9CGB8CJviG63T4wpo=";
+    sha256 = "sha256-GISuAu1tHuGULZh43zb4yudwr2UbPrtnAQWz0G9IbYE=";
   };
 
   propagatedBuildInputs = with python3.pkgs; [
