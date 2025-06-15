@@ -6,6 +6,7 @@ flake: {
 }: let
   cfg = config.services.auto-profile-tg;
   pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  homeDir = config.users.users.bahrom04.home;
   
 in {
   options = {
@@ -92,6 +93,8 @@ in {
             "--city=${cfg.city}"
             "--weather_api_key=${cfg.weather-api-key}"
             ]; 
+          StandardOutPath = "/${homeDir}/Library/Logs/auto-profile-tg.log";
+          StandardErrorPath = "/${homeDir}/Library/Logs/auto-profile-tg-error.log";
           KeepAlive = true;
           RunAtLoad = true;
           # EnvironmentVariables.PATH = "${pkgs.restic}/bin:/usr/bin";
