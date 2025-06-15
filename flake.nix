@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    poetry2nix.url = "github:nix-community/poetry2nix";
   };
 
   outputs = {
@@ -15,14 +17,28 @@
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+      poetryApp = poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
+      autoProfileTgPkg = poetryApp.mkPoetryApplication {
+        projectDir = pkgs.fetchFromGitHub {
+          owner = "bahrom04";
+          repo = "auto-profile-tg";
+          rev = "master";
+          sha256 = "sha256-Dg6sIklds5wdBm3sFoulhG41cGDbhpGhjjodpOy+kuw=";
+        };
+      };
     in {
       # Nix script formattar
       formatter = pkgs.alejandra;
 
-      devShells.default = pkgs.callPackage ./shell.nix {inherit pkgs;};
+      devShells.default = autoProfileTgPkg.developmentShell;
 
       # Output package
-      packages.default = pkgs.callPackage ./. {};
+      packages.default = autoProfileTgPkg;
+
+      apps.default = {
+        type = "app";
+        program = "${autoProfileTgPkg}/bin/runner";
+      };
     })
     // {
       darwinModules.default = import ./module.nix self;
