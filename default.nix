@@ -9,7 +9,7 @@
 python3.pkgs.buildPythonPackage rec {
   pname = "auto-profile-tg";
   version = "0.0.1";
-  # src =./auto-profile-tg;
+  format = "pyproject";
   src = fetchFromGitHub {
     owner = "bahrom04";
     repo = "auto-profile-tg";
@@ -28,30 +28,6 @@ python3.pkgs.buildPythonPackage rec {
     telethon
     setuptools
   ];
-
-  postPatch = ''
-    chmod +x ./auto_profile_tg/main.py
-  '';
-
-  preBuild = ''
-  cat > setup.py <<EOF
-from setuptools import setup, find_packages
-
-with open('./auto_profile_tg/requirements.txt') as f:
-    install_requires = f.read().splitlines()
-
-setup(
-  name="auto-profile-tg",
-  packages=find_packages(include=["auto_profile_tg", "auto_profile_tg.*"]),
-  version='0.1.0',
-  install_requires=install_requires,
-
-  entry_points={
-    'console_scripts': ['auto-profile-tg = auto_profile_tg.__main__:main']
-  }
-)
-EOF
-'';
 
   # No tests
   doCheck = false;

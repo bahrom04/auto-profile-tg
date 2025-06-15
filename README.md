@@ -136,8 +136,8 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting a pull reques
 
 ## Notes
 ```
-python setup.py install
-pip install -e . 
+poetry install 
+poetry run runner 
 ```
 
 ### You can see if your package file compiles 

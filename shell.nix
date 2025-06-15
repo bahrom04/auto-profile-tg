@@ -25,5 +25,7 @@ in
 
       # Python
       pythonEnv
+
+      poetry
     ];
   }
