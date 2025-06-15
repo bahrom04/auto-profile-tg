@@ -23,6 +23,10 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
+name = "auto-profile-tg"
+version = "0.1.0"
+description = ""
+authors = ["bahrom04 https://github.com/bahrom04"]
 package-mode = true
 
 [tool.poetry.scripts]
