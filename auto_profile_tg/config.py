@@ -8,14 +8,11 @@ parser = argparse.ArgumentParser(description="run application")
 parser.add_argument("--api_id", required=True)
 parser.add_argument("--api_hash", required=True)
 parser.add_argument("--phone_number", required=True)
-
 parser.add_argument("--first_name", required=True)
-
 parser.add_argument("--lat", required=True)
 parser.add_argument("--lon", required=True)
 parser.add_argument("--timezone", required=True)
 parser.add_argument("--city", required=True)
-
 parser.add_argument("--weather_api_key", required=True)
 
 args = parser.parse_args()
@@ -58,7 +55,4 @@ LON = f"{args.lon}"
 TIMEZONE = f"{args.timezone}"
 CITY = f"{args.city}"
 
-print("---------------------------------")
-print(TIMEZONE)
-print("---------------------------------")
 logger.info(f"Config loaded: CITY={CITY}, TIMEZONE={TIMEZONE}, LAT={LAT}, LON={LON}")

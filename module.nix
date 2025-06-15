@@ -6,19 +6,7 @@ flake: {
 }: let
   cfg = config.services.auto-profile-tg;
   pkg = flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
-  genArgs = {cfg}: let
-    app-id = config.app-id;
-    api-hash = config.api-hash;
-    phone-number = config.phone-number;
-    first-name = config.first-name;
-    lat = config.lat;
-    lon = config.lon;
-    timezone = config.timezone;
-    city = config.city;
-    weather-api-key = config.weather-api-key;
-  in
-    lib.strings.concatStringsSep " " [app-id api-hash phone-number first-name lat lon timezone city weather-api-key];
+  
 in {
   options = {
     services.auto-profile-tg = {
@@ -90,10 +78,20 @@ in {
     # I use mac btw
     launchd.user.agents = {
       auto-profile-tg = {
-        # enable = true;
         serviceConfig = {
-          Program = "${pkg}/bin/main.py";
-          # ProgramArguments = ["${pkg}/bin/main.py" "${genArgs {cfg = cfg;}"]; do .env parsing
+          # Program = "${pkg}/bin/runner";
+          ProgramArguments = [
+            "${pkg}/bin/runner" 
+            "--api_id=${toString cfg.api-id}" 
+            "--api_hash=${cfg.api-hash}" 
+            "--phone_number=${cfg.phone-number}" 
+            "--first_name=${cfg.first-name}"
+            "--lat=${cfg.lat}"
+            "--lon=${cfg.lon}"
+            "--timezone=${cfg.timezone}"
+            "--city=${cfg.city}"
+            "--weather_api_key=${cfg.weather-api-key}"
+            ]; 
           KeepAlive = true;
           RunAtLoad = true;
           # EnvironmentVariables.PATH = "${pkgs.restic}/bin:/usr/bin";
