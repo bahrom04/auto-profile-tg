@@ -98,3 +98,10 @@ async def main():
         await start_scheduler(client)
     except Exception as e:
         logger.critical(f"Startup failed: {e}")
+
+
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        logger.warning("Bot stopped by user.")
