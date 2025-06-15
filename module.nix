@@ -14,7 +14,7 @@ in {
       enable = lib.mkEnableOption "auto-profile-tg";
 
       # Telegram API credentials from my.telegram.org
-      app-id = lib.mkOption {
+      api-id = lib.mkOption {
         type = lib.types.int;
         default = 0;
         example = 12345678;
