@@ -17,17 +17,17 @@ python3.pkgs.buildPythonPackage rec {
     sha256 = "sha256-XUldev+62AvhKCkC08q8DDgXhPmoLaSSYQ0mAsBYhMw=";
   };
 
-  propagatedBuildInputs = with python3.pkgs; [
-    pip
-    APScheduler
-    loguru
-    python-dotenv
-    pytz
-    requests
-    tenacity
-    telethon
-    setuptools
-  ];
+  # propagatedBuildInputs = with python3.pkgs; [
+  #   pip
+  #   APScheduler
+  #   loguru
+  #   python-dotenv
+  #   pytz
+  #   requests
+  #   tenacity
+  #   telethon
+  #   setuptools
+  # ];
 
   nativeBuildInputs = with python3.pkgs;[
     poetry-core
