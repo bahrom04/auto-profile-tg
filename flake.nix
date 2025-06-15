@@ -24,7 +24,7 @@
           owner = "bahrom04";
           repo = "auto-profile-tg";
           rev = "master";
-          sha256 = "sha256-Upn3EHDNoe+8wXnSlqEI8BEJnLyJu9PnLXQZIn7WA0s=";
+          sha256 = "sha256-EPUwtxJw7kiD2BSkxuQ3/epuyX5qoE8k9ETIiST9fgA=";
         };
       };
     in {

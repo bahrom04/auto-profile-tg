@@ -1,33 +1,26 @@
-[project]
+[tool.poetry]
 name = "auto-profile-tg"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "bahrom04",email = "magdiyevbahrom@gmail.com"}
-]
+description = "Adds real-time clock to Telegram profile"
 readme = "README.md"
-requires-python = ">=3.12,<4.0"
-dependencies = [
-    "apscheduler (==3.11.0)",
-    "loguru (==0.7.3)",
-    "python-dotenv (==1.1.0)",
-    "pytz (==2025.2)",
-    "requests (==2.32.4)",
-    "telethon (==1.40.0)",
-    "tenacity (==9.1.2)",
-    "setuptools (>=80.9.0,<81.0.0)"
-]
+authors = ["bahrom04 https://github.com/bahrom04"]
+packages = [{ include = "auto_profile_tg" }]
+package-mode = true
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+apscheduler = "==3.11.0"
+loguru = "==0.7.3"
+python-dotenv = "==1.1.0"
+pytz = "==2025.2"
+requests = "==2.32.4"
+telethon = "==1.40.0"
+tenacity = "==9.1.2"
+setuptools = ">=80.9.0,<81.0.0"
+
+[tool.poetry.scripts]
+runner = "auto_profile_tg.__main__:runner"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-name = "auto-profile-tg"
-version = "0.1.0"
-description = ""
-authors = ["bahrom04 https://github.com/bahrom04"]
-package-mode = true
-
-[tool.poetry.scripts]
-runner = "auto_profile_tg.__main__:runner"
