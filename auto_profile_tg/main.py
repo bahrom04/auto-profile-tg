@@ -12,7 +12,8 @@ import pytz
 from auto_profile_tg import config
 from auto_profile_tg.utils.bio_utils import generate_display_fields
 
-log_dir = Path.home() / "bot.log"
+log_dir = Path.home() / "auto_profile_logs" / "bot.log"
+session_file_dir = Path.home() / "auto_profile_logs" / "AutoProfileUpdater"
 
 # Configure Loguru logger
 logger.add(
@@ -95,7 +96,7 @@ async def main():
     Initializes Telegram client and starts the scheduler.
     """
     try:
-        client = TelegramClient("AutoProfileUpdater", config.API_ID, config.API_HASH)
+        client = TelegramClient(str(session_file_dir), config.API_ID, config.API_HASH)
         await client.start(phone=config.PHONE_NUMBER)
         logger.success("Successfully connected to Telegram account.")
         await start_scheduler(client)
