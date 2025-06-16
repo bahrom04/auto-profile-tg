@@ -15,7 +15,7 @@ in {
 
       # Telegram API credentials from my.telegram.org
       api_id = lib.mkOption {
-        type = lib.types.int;
+        type = lib.types.str;
         default = 0;
         example = 12345678;
       };
