@@ -16,7 +16,7 @@ log_dir = Path.home() / "bot.log"
 
 # Configure Loguru logger
 logger.add(
-    file=log_dir,
+    str(log_dir),
     rotation="1 week",
     compression="zip",
     level="INFO",
