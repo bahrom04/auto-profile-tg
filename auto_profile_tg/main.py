@@ -3,6 +3,7 @@
 import os
 import asyncio
 from datetime import datetime
+from pathlib import Path
 from telethon import TelegramClient, functions
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from loguru import logger
@@ -11,9 +12,11 @@ import pytz
 from auto_profile_tg import config
 from auto_profile_tg.utils.bio_utils import generate_display_fields
 
+log_dir = Path.home() / "bot.log"
+
 # Configure Loguru logger
 logger.add(
-    "bot.log",
+    file=log_dir,
     rotation="1 week",
     compression="zip",
     level="INFO",
