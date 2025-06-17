@@ -156,18 +156,6 @@ files = [
 ]
 
 [[package]]
-name = "flit-core"
-version = "3.12.0"
-description = "Distribution-building parts of Flit. See flit package for more information"
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = [
-    {file = "flit_core-3.12.0-py3-none-any.whl", hash = "sha256:e7a0304069ea895172e3c7bb703292e992c5d1555dd1233ab7b5621b5b69e62c"},
-    {file = "flit_core-3.12.0.tar.gz", hash = "sha256:18f63100d6f94385c6ed57a72073443e1a71a4acb4339491615d0f16d6ff01b2"},
-]
-
-[[package]]
 name = "idna"
 version = "3.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -391,4 +379,4 @@ dev = ["black (>=19.3b0) ; python_version >= \"3.6\"", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4.0"
-content-hash = "baa8a9e1e4728466309f94304739e9a6c8bcbce539e1ed3512e5616427193596"
+content-hash = "46a43e9cf5541d42017e1b1cd9520aac6c24583d8d71ef033fb31b88bd670f3e"

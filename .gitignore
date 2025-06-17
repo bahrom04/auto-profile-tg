@@ -13,3 +13,6 @@ result
 
 # direnv
 .direnv
+
+# poetry build
+dist

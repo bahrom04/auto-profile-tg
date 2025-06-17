@@ -1,0 +1,28 @@
+name: "Test CI"
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Cache Nix Store
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check for flake configuration
+        run: nix flake check --show-trace --all-systems
+
+      - name: Build package with no errors
+        run: nix build . --show-trace
+        
+      # - name: update for poetry.lock
+      #   run: poetry lock
+      
+      # - name: Install python dependensies
+      #   run: poetry lock
