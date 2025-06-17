@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 from loguru import logger
 
 
@@ -21,9 +22,8 @@ class Config:
         def set_env_variables(key_path: str):
             """Safely convert sops environment variable from this /run/secrets/api_id to actual key"""
             try:
-                with open(key_path) as f:
-                    content = f.read().strip()
-                    return content
+                content = Path(key_path).read_text().strip()
+                return content
             except Exception as e:
                 logger.warning(f"Invalid env for {key_path}: {e}")
                 return e
