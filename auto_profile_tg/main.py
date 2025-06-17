@@ -9,7 +9,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from loguru import logger
 import pytz
 
-from auto_profile_tg import config
+from auto_profile_tg.config import config
 from auto_profile_tg.utils.bio_utils import generate_display_fields
 
 log_dir = Path.home() / "auto_profile_logs" / "bot.log"

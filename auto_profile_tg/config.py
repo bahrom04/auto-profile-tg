@@ -1,8 +1,6 @@
-import os, argparse
-from dotenv import load_dotenv
+import argparse
 from loguru import logger
 
-load_dotenv()
 
 parser = argparse.ArgumentParser(description="run application")
 parser.add_argument("--api_id", required=True)
@@ -18,41 +16,31 @@ parser.add_argument("--weather_api_key", required=True)
 args = parser.parse_args()
 
 
-def _safe_int(key: str, default: int = 0) -> int:
-    """Safely convert environment variable to int, logging warning if conversion fails."""
-    try:
-        return int(os.getenv(key, default))
-    except ValueError:
-        logger.warning(f"Invalid int for {key}, defaulting to {default}")
-        return default
+class Config:
+    def __init__(self, args, production: bool):
+        def set_env_variables(key_path: str):
+            """Safely convert sops environment variable from this /run/secrets/api_id to actual key"""
+            try:
+                with open(key_path) as f:
+                    return str(f.read().strip())
+            except Exception as e:
+                logger.warning(f"Invalid env for {key_path}: {e}")
+                return 0
+            
+        def val(x):
+            return set_env_variables(key_path=x) if production == True else x
+        
+        self.API_ID = val(args.api_id)
+        self.API_HASH = val(args.api_hash)
+        self.PHONE_NUMBER = val(args.phone_number)
+        self.FIRST_NAME = val(args.first_name)
+        self.WEATHER_API_KEY = val(args.weather_api_key)
+        self.LAT = val(args.lat)
+        self.LON = val(args.lon)
+        self.TIMEZONE = val(args.timezone)
+        self.CITY = val(args.city)
+        self.LON = val(args.lon)
 
-
-def _safe_float(key: str, default: float = 0.0) -> float:
-    """Safely convert environment variable to float, logging warning if conversion fails."""
-    try:
-        return float(os.getenv(key, default))
-    except ValueError:
-        logger.warning(f"Invalid float for {key}, defaulting to {default}")
-        return default
-
-
-# Telegram API credentials
-API_ID = f"{args.api_id}"
-API_HASH = f"{args.api_hash}"
-PHONE_NUMBER = f"{args.phone_number}"
-
-# User credentials
-FIRST_NAME = f"{args.first_name}"
-
-# Weather API key
-WEATHER_API_KEY = f"{args.weather_api_key}"
-if not WEATHER_API_KEY:
-    logger.warning("Missing WEATHER_API_KEY")
-
-# Geographic coordinates and timezone
-LAT =f"{args.lat}"
-LON = f"{args.lon}"
-TIMEZONE = f"{args.timezone}"
-CITY = f"{args.city}"
-
-logger.info(f"Config loaded: CITY={CITY}, TIMEZONE={TIMEZONE}, LAT={LAT}, LON={LON}")
+config = Config(args, production=True)
+        
+logger.info(f"Config loaded: CITY={config.CITY}, TIMEZONE={config.TIMEZONE}, LAT={config.LAT}, LON={config.LON}")

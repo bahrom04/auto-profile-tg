@@ -4,7 +4,7 @@ from datetime import datetime
 from tenacity import retry, stop_after_attempt, wait_fixed
 from loguru import logger
 
-from auto_profile_tg.config import LAT, LON, TIMEZONE
+from auto_profile_tg.config import config
 
 # Uzbek names for the five daily Islamic prayers
 PRAYER_NAMES = {
@@ -39,7 +39,7 @@ def fetch_prayer_data() -> dict:
     Retries up to 3 times on failure with 2s wait between.
     """
     try:
-        url = f"https://api.aladhan.com/v1/timings?latitude={LAT}&longitude={LON}&school=1&timezonestring{TIMEZONE}"
+        url = f"https://api.aladhan.com/v1/timings?latitude={config.LAT}&longitude={config.LON}&school=1&timezonestring{config.TIMEZONE}"
         response = requests.get(url, timeout=5)
         response.raise_for_status()
         return response.json()["data"]
@@ -53,7 +53,7 @@ def get_next_prayer_short(timings: dict) -> str:
     Determines the next upcoming prayer and how much time remains until it.
     Returns a short Uzbek message like: "Bomdod 03:12 (qoldi: 2 soat 15 daqiqa)"
     """
-    tz = pytz.timezone(TIMEZONE)
+    tz = pytz.timezone(config.TIMEZONE)
     now = datetime.now(tz)
 
     try:

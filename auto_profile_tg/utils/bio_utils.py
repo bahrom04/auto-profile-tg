@@ -2,7 +2,7 @@ from datetime import datetime
 import pytz
 from loguru import logger
 
-from auto_profile_tg import config
+from auto_profile_tg.config import config
 from auto_profile_tg.utils.weather_utils import get_weather_short
 from auto_profile_tg.utils.prayer_utils import fetch_prayer_data, get_next_prayer_short, get_hijri_short
 from auto_profile_tg.utils.time_utils import format_short_date, format_time

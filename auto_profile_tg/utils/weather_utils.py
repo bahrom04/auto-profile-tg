@@ -4,7 +4,7 @@ import requests
 from tenacity import retry, stop_after_attempt, wait_fixed
 from loguru import logger
 
-from auto_profile_tg.config import WEATHER_API_KEY, CITY, TIMEZONE
+from auto_profile_tg.config import config
 
 # Mapping of English weather descriptions to Uzbek
 WEATHER_DESCRIPTIONS = {
@@ -38,7 +38,7 @@ def fetch_weather_data():
     """
     url = (
         f"https://api.openweathermap.org/data/2.5/weather"
-        f"?q={CITY}&appid={WEATHER_API_KEY}&units=metric&lang=en"
+        f"?q={config.CITY}&appid={config.WEATHER_API_KEY}&units=metric&lang=en"
     )
 
     try:
@@ -57,7 +57,7 @@ def get_weather_short() -> str:
     Example: 'T: +23°C, Quyoshli'
     If data cannot be retrieved or parsed, returns fallback value.
     """
-    tz = pytz.timezone(TIMEZONE)
+    tz = pytz.timezone(config.TIMEZONE)
     now_ts = datetime.now(tz).timestamp()
 
     # Use cached data if it's still valid
