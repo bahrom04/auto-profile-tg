@@ -22,10 +22,11 @@ class Config:
             """Safely convert sops environment variable from this /run/secrets/api_id to actual key"""
             try:
                 with open(key_path) as f:
+                    logger.info("the keys loaded:", str(f.read().strip()))
                     return str(f.read().strip())
             except Exception as e:
                 logger.warning(f"Invalid env for {key_path}: {e}")
-                return 0
+                return ""
             
         def val(x):
             return set_env_variables(key_path=x) if production == True else x
