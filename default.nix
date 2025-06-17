@@ -10,12 +10,13 @@ python3.pkgs.buildPythonPackage rec {
   pname = "auto-profile-tg";
   version = "0.0.1";
   format = "pyproject";
-  src = fetchFromGitHub {
-    owner = "bahrom04";
-    repo = "auto-profile-tg";
-    rev = "master";
-    sha256 = "sha256-xzJJIagAG2JHjZdbOLNGmfd2uJDIuD5PwmeogoRKHvM=";
-  };
+  src = ./.;
+  # src = fetchFromGitHub {
+  #   owner = "bahrom04";
+  #   repo = "auto-profile-tg";
+  #   rev = "master";
+  #   sha256 = "sha256-xzJJIagAG2JHjZdbOLNGmfd2uJDIuD5PwmeogoRKHvM=";
+  # };
 
   propagatedBuildInputs = with python3.pkgs; [
     pip
