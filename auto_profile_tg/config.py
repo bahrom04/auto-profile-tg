@@ -23,7 +23,8 @@ class Config:
             """Safely convert sops environment variable from this /run/secrets/api_id to actual key"""
             try:
                 content = Path(key_path).read_text().strip()
-                return content
+                logger.info("reading file: ", content)
+                return str(content)
             except Exception as e:
                 logger.warning(f"Invalid env for {key_path}: {e}")
                 return e
